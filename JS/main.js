@@ -110,6 +110,18 @@ function mostrarStock() {
   return stock;
 }
 
+//FORMA DE HACERLO DE MENOR A MAYOR
+function ordenarPorPrecio() {
+  arregloBicis.sort((a, b) => a.getPrecio() - b.getPrecio());
+  alert("Las bicicletas ordenadas por precio son: \n" + mostrarStock());
+}
+
+//FORMA DE HACERLO DE MAYOR A MENOR
+/* function ordenarPorPrecio() {
+  arregloBicis.sort((a, b) => b.getPrecio() - a.getPrecio());
+  alert("Las bicicletas ordenadas por precio son: \n" + mostrarStock());
+} */
+
 function actualizarPrecio() {
   let bici = prompt("Ingrese la bicicleta a actualizar");
   let indice = buscarBici(bici);
