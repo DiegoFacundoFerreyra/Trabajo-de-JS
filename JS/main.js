@@ -46,6 +46,35 @@ class Bicis {
   }
 }
 
+const botones = document.querySelectorAll(".seleccion");
+
+botones.forEach((boton) => {
+  boton.addEventListener("click", () => {
+    const contenedor = boton.closest(".foto-producto");
+    const resultado = contenedor.querySelector(".resultado");
+
+    resultado.textContent = "Producto seleccionado";
+
+    boton.style.display = "none";
+  });
+});
+
+const toggleMenu = document.getElementById("toggleMenu");
+const padre = document.querySelector(".padre");
+
+toggleMenu.addEventListener("click", () => {
+  padre.classList.toggle("activo");
+  padre.classList.toggle("oculto");
+
+  if (padre.classList.contains("activo")) {
+    toggleMenu.textContent = "✖ CATALOGO DE BICICLETAS";
+  } else {
+    toggleMenu.textContent = "☰ CATALOGO DE BICICLETAS";
+  }
+});
+// Mostrar el menú inicialmente como oculto
+padre.classList.add("oculto");
+
 // BASE DE DATOS DE LAS BICICLETAS
 const arregloBicis = new Array();
 arregloBicis.push(new Bicis(1, "Carrera", 29, 500000));
@@ -60,7 +89,7 @@ while (respuesta != "5" && respuesta) {
   respuesta = mostrarMenu();
 }
 
-function mostrarMenu() {
+/* function mostrarMenu() {
   let respuesta = prompt(
     "Elija una opcion:\n" +
       "1) Ver las bicicletas\n" +
@@ -69,7 +98,7 @@ function mostrarMenu() {
       "4) Buscar por clase\n" +
       "5) Salir"
   );
-
+ 
   if (respuesta == "1") {
     alert("Las bicicletas son:\n" + mostrarStock());
   } else if (respuesta == "2") {
@@ -85,7 +114,7 @@ function mostrarMenu() {
   }
   return respuesta;
 }
-
+*/
 function buscarBici(id) {
   let i = 0;
   while (i < arregloBicis.length) {
