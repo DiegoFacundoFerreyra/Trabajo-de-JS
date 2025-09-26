@@ -75,6 +75,20 @@ toggleMenu.addEventListener("click", () => {
 // Mostrar el menú inicialmente como oculto
 padre.classList.add("oculto");
 
+const gif = document.querySelector(".gif");
+let x = -200;
+const velocidad = 4;
+
+function moverG() {
+  x += velocidad;
+  gif.style.left = x + "px";
+  if (x > window.innerWidth) {
+    x = -200; // Reiniciar la posición al salir de la pantalla
+  }
+  requestAnimationFrame(moverG);
+}
+moverG();
+
 // BASE DE DATOS DE LAS BICICLETAS
 const arregloBicis = new Array();
 arregloBicis.push(new Bicis(1, "Carrera", 29, 500000));

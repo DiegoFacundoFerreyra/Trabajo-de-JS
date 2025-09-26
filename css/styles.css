@@ -93,14 +93,38 @@ h1 {
 .oculto {
   max-height: 0;
   opacity: 0;
+  overflow: hidden;
+  transition: max-height 1s ease, opacity 1s ease;
 }
 
 .activo {
   max-height: 2000px;
   opacity: 1;
+  transition: max-height 2s ease, opacity 2s ease;
 }
 
 h4 {
   cursor: pointer;
   user-select: none;
+}
+
+.carrusel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 80px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 480px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gif {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 80px;
 }
