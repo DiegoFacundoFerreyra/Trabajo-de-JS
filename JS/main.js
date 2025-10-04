@@ -1,23 +1,3 @@
-/* Clase que modela y define las bicicletas */
-const contenedorTarjetas = document.getElementsByClassName("hijos");
-
-function crearTarjetasProductos(productos) {
-  productos.forEach((producto) => {
-    const nuevaBici = document.createElement("div");
-    nuevaBici.classList = "tarjeta-producto";
-    nuevaBici.innerHTML = ` 
-      <div class="foto-producto">
-        <img src="../img/montaña.png/${producto.id}.png" />
-        <h3 class="bicicleta">${producto.clase}</h3>
-        <p class="precio">${producto.precio.toLocaleString()}</p>
-        <button class="seleccion">Seleccionar</button>`;
-
-    contenedorTarjetas.appendChild(nuevaBici);
-  });
-}
-
-crearTarjetasProductos(productos);
-
 const botones = document.querySelectorAll(".seleccion");
 
 botones.forEach((boton) => {
@@ -135,3 +115,27 @@ function buscarPorClase() {
     alert("No se encontraron bicicletas de esa clase");
   }
 }
+
+const contenedorTarjetas = document.getElementsByClassName("hijos")[0];
+
+function crearTarjetasProductos(productos) {
+  productos.forEach((producto) => {
+    const nuevaBici = document.createElement("div");
+    nuevaBici.classList.add("tarjeta-producto");
+    nuevaBici.innerHTML = ` 
+      <div class="foto-producto">
+        <img src="../img/${producto.id}.png" alt="${producto.clase}" />
+        <h3 class="bicicleta">${producto.clase}</h3>
+        <p class="precio">$${producto.precio.toLocaleString()}</p>
+        <button class="seleccion">Seleccionar</button>
+      </div>`;
+
+    contenedorTarjetas.appendChild(nuevaBici);
+
+    nuevaBici.querySelector("button").addEventListener("click", () => {
+      agregarAlCarrito(producto);
+    });
+  });
+}
+
+crearTarjetasProductos(productos);
