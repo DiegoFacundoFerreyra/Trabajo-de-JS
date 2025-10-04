@@ -1,50 +1,22 @@
 /* Clase que modela y define las bicicletas */
-class Bicis {
-  constructor(id, clase, rodado, precio) {
-    this.id = id;
-    this.clase = clase;
-    this.rodado = rodado;
-    this.precio = precio;
-  }
+const contenedorTarjetas = document.getElementsByClassName("hijos");
 
-  mostrarDescripcionCompleta() {
-    return (
-      "#" +
-      this.id +
-      " - " +
-      this.clase +
-      " Rodado: " +
-      this.rodado +
-      " $ " +
-      this.precio.toLocaleString("es-AR")
-    );
-  }
+function crearTarjetasProductos(productos) {
+  productos.forEach((producto) => {
+    const nuevaBici = document.createElement("div");
+    nuevaBici.classList = "tarjeta-producto";
+    nuevaBici.innerHTML = ` 
+      <div class="foto-producto">
+        <img src="../img/montaña.png/${producto.id}.png" />
+        <h3 class="bicicleta">${producto.clase}</h3>
+        <p class="precio">${producto.precio.toLocaleString()}</p>
+        <button class="seleccion">Seleccionar</button>`;
 
-  getId() {
-    return this.id;
-  }
-  setId(nuevo_id) {
-    this.id = nuevo_id;
-  }
-  getClase() {
-    return this.clase;
-  }
-  setClase(nueva_clase) {
-    this.clase = nueva_clase;
-  }
-  getRodado() {
-    return this.rodado;
-  }
-  setRodado(nuevo_rodado) {
-    this.rodado = nuevo_rodado;
-  }
-  getPrecio() {
-    return this.precio;
-  }
-  setPrecio(nuevo_precio) {
-    this.precio = nuevo_precio;
-  }
+    contenedorTarjetas.appendChild(nuevaBici);
+  });
 }
+
+crearTarjetasProductos(productos);
 
 const botones = document.querySelectorAll(".seleccion");
 
@@ -77,7 +49,7 @@ padre.classList.add("oculto");
 
 const gif = document.querySelector(".gif");
 let x = -200;
-const velocidad = 4;
+const velocidad = 8;
 
 function moverG() {
   x += velocidad;
@@ -88,47 +60,12 @@ function moverG() {
   requestAnimationFrame(moverG);
 }
 moverG();
-
-// BASE DE DATOS DE LAS BICICLETAS
-const arregloBicis = new Array();
-arregloBicis.push(new Bicis(1, "Carrera", 29, 500000));
-arregloBicis.push(new Bicis(2, "Montaña", 28, 420000));
-arregloBicis.push(new Bicis(3, "Paseo", 26, 280000));
-arregloBicis.push(new Bicis(4, "Playera", 26, 200000));
-arregloBicis.push(new Bicis(5, "Niños", 16, 150000));
-arregloBicis.push(new Bicis(6, "Plegable", 20, 340000));
-
+// Clase Bicicleta
 let respuesta = true;
 while (respuesta != "5" && respuesta) {
   respuesta = mostrarMenu();
 }
 
-/* function mostrarMenu() {
-  let respuesta = prompt(
-    "Elija una opcion:\n" +
-      "1) Ver las bicicletas\n" +
-      "2) Asignar nuevo precio\n" +
-      "3) Ordenar por precio\n" +
-      "4) Buscar por clase\n" +
-      "5) Salir"
-  );
- 
-  if (respuesta == "1") {
-    alert("Las bicicletas son:\n" + mostrarStock());
-  } else if (respuesta == "2") {
-    actualizarPrecio();
-  } else if (respuesta == "3") {
-    ordenarPorPrecio();
-  } else if (respuesta == "4") {
-    buscarPorClase();
-  } else if (respuesta.toLowerCase() == "5") {
-    return respuesta.toLowerCase();
-  } else {
-    alert("Opción inválida");
-  }
-  return respuesta;
-}
-*/
 function buscarBici(id) {
   let i = 0;
   while (i < arregloBicis.length) {

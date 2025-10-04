@@ -8,13 +8,32 @@
   </head>
   <body>
     <h1>Entrega 2 JS Diego Ferreyra</h1>
+    <header class="busqueda">
+      <img
+        class="carrito"
+        src="./img/usuario.png"
+        alt="usuario"
+        title="Usuario"
+      />
+      <input type="text" id="buscar" placeholder="Buscar tu bicicleta" />
+      <button id="btnBuscar">Buscar</button>
+      <a href="./HTML/cart.html">
+        <img
+          class="carrito"
+          src="./img/carrito.png"
+          alt="carrito de compras"
+          title="Carrito de compras"
+        />
+        <span id="contador-carrito">0</span></a
+      >
+    </header>
     <div class="menu">
       <h4 id="toggleMenu">☰ CATALOGO DE BICICLETAS</h4>
     </div>
     <div class="padre">
       <nav class="hijos">
         <div class="foto-producto">
-          <p class="bicicleta">BICICLETA DE CARRERA</p>
+          <h3 class="bicicleta">BICICLETA DE CARRERA</h3>
           <img
             class="bici"
             src="./img/carrera.png"
@@ -29,7 +48,7 @@
           <p class="resultado"></p>
         </div>
         <div class="foto-producto">
-          <p class="bicicleta">BICICLETA DE MONTAÑA</p>
+          <h3 class="bicicleta">BICICLETA DE MONTAÑA</h3>
           <img
             class="bici"
             src="./img/montaña.png"
@@ -44,7 +63,7 @@
           <p class="resultado"></p>
         </div>
         <div class="foto-producto">
-          <p class="bicicleta">BICICLETA PARA NIÑOS</p>
+          <h3 class="bicicleta">BICICLETA PARA NIÑOS</h3>
           <img class="bici" src="./img/niños.png" alt="niños" title="Niños" />
           <p class="precio">150.000</p>
           <button>
@@ -54,7 +73,7 @@
           <p class="resultado"></p>
         </div>
         <div class="foto-producto">
-          <p class="bicicleta">BICICLETA DE PASEO</p>
+          <h3 class="bicicleta">BICICLETA DE PASEO</h3>
           <img class="bici" src="./img/paseo.png" alt="paseo" title="Paseo" />
           <p class="precio">600.000</p>
           <button>
@@ -64,7 +83,7 @@
           <p class="resultado"></p>
         </div>
         <div class="foto-producto">
-          <p class="bicicleta">BICICLETA PLAYERA</p>
+          <h3 class="bicicleta">BICICLETA PLAYERA</h3>
           <img
             class="bici"
             src="./img/playera.png"
@@ -79,14 +98,14 @@
           <p class="resultado"></p>
         </div>
         <div class="foto-producto">
-          <p class="bicicleta">BICICLETA PLEGABLE</p>
+          <h3 class="bicicleta">BICICLETA PLEGABLE</h3>
           <img
             class="bici"
             src="./img/plegable.png"
             alt="plegable"
             title="Plegable"
           />
-          <p class="precio">8900.000</p>
+          <p class="precio">880.000</p>
           <button>
             <small class="seleccion">Seleccionar producto</small>
           </button>
@@ -99,6 +118,24 @@
     <div class="carrusel">
       <img class="gif" src="./img/ciclista.gif" alt="ciclista" />
     </div>
+    <footer>
+      <img
+        class="foto-marca"
+        src="./img/shimano.png"
+        alt="shimano"
+        title="Shimano"
+      />
+      <img class="foto-marca" src="./img/slp.png" alt="slp" title="SLP" />
+      <img
+        class="foto-marca"
+        src="./img/topmega.png"
+        alt="topmega"
+        title="TopMega"
+      />
+      <img class="foto-marca" src="./img/vairo.png" alt="vairo" title="Vairo" />
+      <img class="foto-marca" src="./img/venzo.png" alt="venzo" title="Venzo" />
+    </footer>
+    <script src="./JS/producto.js"></script>
     <script src="./JS/main.js"></script>
   </body>
 </html>
