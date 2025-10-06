@@ -40,29 +40,59 @@ function moverG() {
   requestAnimationFrame(moverG);
 }
 moverG();
-// Clase Bicicleta
-let respuesta = true;
-while (respuesta != "5" && respuesta) {
-  respuesta = mostrarMenu();
+
+const contadorCarrito = document.getElementById("contador-carrito");
+
+// Cuando el DOM está listo
+document.addEventListener("DOMContentLoaded", () => {
+  // Seleccionamos todos los botones existentes del HTML
+  const botones = document.querySelectorAll(".foto-producto button");
+
+  botones.forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+      const tarjeta = e.target.closest(".foto-producto");
+      const nombre = tarjeta.querySelector("h3").textContent;
+      const precioTexto = tarjeta
+        .querySelector(".precio")
+        .textContent.replace(/\./g, "")
+        .replace("$", "");
+      const precio = parseFloat(precioTexto);
+
+      // Creamos el objeto producto
+      const producto = {
+        id: nombre, // podés usar un id distinto si querés
+        nombre,
+        precio,
+        cantidad: 1,
+      };
+
+      agregarAlCarrito(producto);
+    });
+  });
+
+  // Al cargar, actualizamos el contador
+  actualizarContador();
+});
+
+function agregarAlCarrito(producto) {
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  const productoExistente = carrito.find((p) => p.id === producto.id);
+
+  if (productoExistente) {
+    productoExistente.cantidad++;
+  } else {
+    carrito.push(producto);
+  }
+
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  actualizarContador();
 }
 
-function buscarBici(id) {
-  let i = 0;
-  while (i < arregloBicis.length) {
-    if (arregloBicis[i].getId() == id) {
-      return i;
-    }
-    i++;
-  }
-  return -1;
-}
-
-function mostrarStock() {
-  let stock = "";
-  for (const b of arregloBicis) {
-    stock += b.mostrarDescripcionCompleta() + "\n";
-  }
-  return stock;
+function actualizarContador() {
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  const total = carrito.reduce((acc, prod) => acc + prod.cantidad, 0);
+  contadorCarrito.textContent = total;
 }
 
 // ORDENAR DE MENOR A MAYOR
@@ -76,28 +106,6 @@ function ordenarPorPrecio() {
   arregloBicis.sort((a, b) => b.getPrecio() - a.getPrecio());
   alert("Las bicicletas ordenadas por precio son: \n" + mostrarStock());
 } */
-
-// ACTUALIZAR PRECIO
-function actualizarPrecio() {
-  let bici = Number(prompt("Ingrese el ID de la bicicleta a actualizar"));
-  if (isNaN(bici)) {
-    alert("Debe ingresar un número válido");
-    return;
-  }
-
-  let indice = buscarBici(bici);
-  if (indice >= 0) {
-    let nuevo_precio = Number(prompt("Ingrese un nuevo precio"));
-    if (!isNaN(nuevo_precio) && nuevo_precio > 0) {
-      arregloBicis[indice].setPrecio(nuevo_precio);
-      alert("Ahora la lista es:\n" + mostrarStock());
-    } else {
-      alert("Precio inválido. Debe ser un número mayor a 0.");
-    }
-  } else {
-    alert("No ingresaste un ID de bicicleta válido en stock");
-  }
-}
 
 // BUSCAR POR CLASE
 function buscarPorClase() {
@@ -115,27 +123,3 @@ function buscarPorClase() {
     alert("No se encontraron bicicletas de esa clase");
   }
 }
-
-const contenedorTarjetas = document.getElementsByClassName("hijos")[0];
-
-function crearTarjetasProductos(productos) {
-  productos.forEach((producto) => {
-    const nuevaBici = document.createElement("div");
-    nuevaBici.classList.add("tarjeta-producto");
-    nuevaBici.innerHTML = ` 
-      <div class="foto-producto">
-        <img src="../img/${producto.id}.png" alt="${producto.clase}" />
-        <h3 class="bicicleta">${producto.clase}</h3>
-        <p class="precio">$${producto.precio.toLocaleString()}</p>
-        <button class="seleccion">Seleccionar</button>
-      </div>`;
-
-    contenedorTarjetas.appendChild(nuevaBici);
-
-    nuevaBici.querySelector("button").addEventListener("click", () => {
-      agregarAlCarrito(producto);
-    });
-  });
-}
-
-crearTarjetasProductos(productos);
